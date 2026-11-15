@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Jellyfin.Plugin.ClassicTV.Tests/Jellyfin.Plugin.ClassicTV.Tests.csproj" />
+  <Project Path="Jellyfin.Plugin.ClassicTV/Jellyfin.Plugin.ClassicTV.csproj" />
+</Solution>

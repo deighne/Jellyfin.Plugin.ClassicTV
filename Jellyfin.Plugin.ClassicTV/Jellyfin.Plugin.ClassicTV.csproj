@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Jellyfin.Plugin.ClassicTV</AssemblyName>
+    <RootNamespace>Jellyfin.Plugin.ClassicTV</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Suppress CS1591 (missing XML doc) — types are documented at the class level -->
+    <NoWarn>CS1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configuration\configPage.html" />
+    <EmbeddedResource Include="Configuration\classictv.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ExcludeAssets:runtime is mandatory — prevents packaging Jellyfin runtime assemblies
+         into the plugin DLL, which would cause duplicate type registration failures. -->
+    <PackageReference Include="Jellyfin.Controller" Version="12.3.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Jellyfin.Model" Version="12.3.0">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

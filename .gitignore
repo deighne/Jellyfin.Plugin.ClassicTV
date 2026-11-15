@@ -1,0 +1,11 @@
+bin/
+obj/
+artifacts/
+.ruff_cache/
+*.user
+.vs/
+.idea/
+*.suo
+TestResults/
+*.trx
+.DS_Store

@@ -1,0 +1,61 @@
+name: "ClassicTV"
+guid: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+version: "12.0.0.7"
+targetAbi: "12.0.0.0"
+framework: "net10.0"
+overview: "Classic TV channel scheduling for Jellyfin."
+description: >
+  Serves what should be playing now on each Classic TV channel, at what offset.
+  Used by the Classic TV Kodi addon to drive scheduled playback via the Jellyfin
+  addon's plugin:// URL scheme.
+category: "General"
+owner: "ddickerson"
+artifacts:
+  - "Jellyfin.Plugin.ClassicTV.dll"
+changelog: >
+  12.0.0.7 — Multi-select picker in Dashboard Channel Editor: toggle multiple TV series and/or movies across tabs and add them in one batch.
+  12.0.0.6 — Define missing clearPickerError() in classictv.js (fixed ReferenceError preventing series/movies picker from loading) and preserve active search filter when async list resolves.
+  12.0.0.5 — Use ILibraryManager.GetItemList in ManagementController so series, movies, and episodes populate in Jellyfin 12.3.0.
+  12.0.0.4 — Add Movies support (GET /ClassicTV/manage/library/movies and TV Series / Movies tabs) to the Dashboard Channel Editor picker.
+  12.0.0.3 — Include EpisodeTitle on current and NextItem payloads in GET /ClassicTV/channel/{id}.
+  12.0.0.2 — Pre-rendered TV Guide channel support (`guide: true`), `GET /ClassicTV/guide/stream/{chunkId}`
+  byte-range MP4 streaming endpoint, and optional `?t=` timestamp query parameter on
+  `GET /ClassicTV/channel/{id}` for batch guide pre-rendering.
+  12.0.0.1 — Jellyfin 12.x compatibility: target .NET 10.0 (net10.0) and ABI 12.0.0.0.
+  10.11.0.16 — Mirror channels. A channel with "mirrorUser" set plays whatever that
+  Jellyfin user is watching, at their current position (item, position and paused
+  state from their live session), via the existing GET /ClassicTV/channel/{id}. The
+  channel list now reports "Mirror". Idle looks like an offline channel.
+  10.11.0.15 — Never schedule episodes that are no longer in the library. A
+  deleted/cleaned-up episode ID was still being served, so clients 404'd on it and the
+  watchdog looped on the same dead item. Prune IDs absent from the duration cache at
+  cache-build time and in the controller's on-demand paths.
+  10.11.0.14 — Fix confirm dialogs being hidden behind the editor modal (delete
+  block appeared to do nothing), and fix the schedule NextItem reporting the current
+  item when the episode-end boundary rounds back into its final cache minute.
+  10.11.0.13 — Fix "Add Show" doing nothing: confirmSeriesSelection() reset
+  pickerState.onConfirm (via closeSeriesPicker) before invoking it, so the selected
+  show was never added to the block. Capture the callback before closing.
+  10.11.0.12 — Fix the series picker finding no series: the dashboard reads
+  lowercase fields but the library endpoints return PascalCase, so normalise
+  Series/Episodes and their fields in the page controller. Also collapse duplicate
+  library entries in the picker.
+  10.11.0.11 — Fix the channel config page being inert: the React dashboard does not
+  execute inline <script> in config pages, so the page markup and its logic are split,
+  with the logic in a separate ES module loaded via data-controller (the official
+  plugin pattern).
+  10.11.0.10 — Fix the dashboard config page rendering blank: attach the pageshow
+  listener to the page element instead of document (the event does not bubble), and
+  add the pluginConfigurationPage/type-interior classes.
+  10.11.0.9 — Channel management UI: dashboard config page plus /ClassicTV/manage
+  endpoints (channels CRUD, series/episode pickers) with server-side validation.
+  Adds channel number and enabled flags; disabled channels are hidden from the
+  schedule API. Per-show episode shuffle seeded by rotation cycle (deterministic
+  across restarts).
+  10.11.0.8 — Resolve episode durations on every Jellyfin start via a
+  StartupTrigger, so restarts no longer schedule from the 1800s fallback.
+  10.11.0.7 — Fix schedule rotation only ever playing the first episode of each
+  show. ExpandBlockEpisodes now emits the full episode catalog once per cycle,
+  with weight controlling spacing instead of slot count.
+  10.11.0.1 — Initial release. Schedule engine, cache worker, REST endpoint
+  GET /ClassicTV/channel/{id}.
