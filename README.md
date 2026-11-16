@@ -1,6 +1,6 @@
 # Jellyfin.Plugin.ClassicTV
 
-The schedule engine plugin for **Classic TV** — turns your Jellyfin media library into 24/7, wall-clock-synchronized broadcast television channels.
+The schedule engine plugin for **[Classic TV](https://github.com/deighne/ClassicTV)** — turns your Jellyfin media library into 24/7, wall-clock-synchronized broadcast television channels for Kodi/CRT, Roku, iOS/tvOS, and Web clients.
 
 ---
 
